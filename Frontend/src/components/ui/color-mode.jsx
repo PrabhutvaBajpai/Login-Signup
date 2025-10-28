@@ -48,8 +48,8 @@ export const ColorModeButton = React.forwardRef(
           {...props}
           css={{
             _icon: {
-              width: '5',
-              height: '5',
+              width: '8',
+              height: '8',
             },
           }}
         >
@@ -79,9 +79,9 @@ export const DarkMode = React.forwardRef(function DarkMode(props, ref) {
     <Span
       color='fg'
       display='contents'
-      className='chakra-theme dark'
+      className='chakra-theme light'
       colorPalette='gray'
-      colorScheme='dark'
+      colorScheme='black'
       ref={ref}
       {...props}
     />
