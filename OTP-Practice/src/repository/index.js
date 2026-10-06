@@ -38,23 +38,27 @@ class OtpRepository {
 
     async deleteAllOtp(){
         try{
-            const res = await Clinik.deleteMany() ; 
-            return {status: "successful", message: res.message} ; 
+            await Clinik.deleteMany({}) ; 
+            return {status: "successful", message: "All OTPs deleted successfully"} ; 
         }
         catch(err){
-            return {status: "failed", message: res.message, origin: "Repo-> deleteAllOtp"} ; 
+            return {status: "failed", message: err.message, origin: "Repo-> deleteAllOtp"} ; 
         }
         
     }
 
-    async deleteOneOtp({email,otp}){
+    async deleteOneOtp(userData){
         try{
-            const storedData = Clinik.findOne({}) ; 
-            if(!storedData){
-                return {status:"failed",message:"Your Email is not present",origin: "Repo->deleteOneEmail"} ; 
+            const email = typeof userData === 'string' ? userData : userData?.email;
+            if (!email) {
+                return { status: "failed", message: "Email parameter is required", origin: "Repo->deleteOneEmail" };
             }
-            const res = Clinik.deleteOne({email}) ; 
-            return {status: "successful", message: res.message} ; 
+            const storedData = await Clinik.findOne({ email }); 
+            if(!storedData){
+                return {status:"failed", message:"Your Email is not present", origin: "Repo->deleteOneEmail"} ; 
+            }
+            await Clinik.deleteOne({ email }) ; 
+            return {status: "successful", message: "OTP deleted successfully"} ; 
         }
         catch(err){
             return {status: "failed", message: err.message, origin: "Repo->deleteOneEmail"} ; 

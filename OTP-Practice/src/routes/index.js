@@ -27,7 +27,9 @@ app.use(
 app.get('/',(req,res)=>{console.log("Yes")});
 app.post('/sendOtp',sendOtp);
 app.post("/validateOtp",validateOtp);
-app.get('/deleteOneOtp',deleteOneOtp); 
+app.get('/deleteOneOtp', deleteOneOtp); 
+app.post('/deleteOneOtp', deleteOneOtp);
+app.delete('/deleteOneOtp', deleteOneOtp);
 
 app.listen(PORT,(req,res)=>{
     connectDB() ; 

@@ -31,11 +31,13 @@ function Register() {
 
   const handleOtpExpire = async () => {
     try {
-      await fetch('http://localhost:5002/deleteOneOtp', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      console.log('🔔 OTP expired and deleted');
+      if (email) {
+        await fetch(`http://localhost:5002/deleteOneOtp?email=${encodeURIComponent(email)}`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        console.log('🔔 OTP expired and deleted for:', email);
+      }
     } catch (error) {
       console.error('❌ Error deleting OTP:', error);
     } finally {

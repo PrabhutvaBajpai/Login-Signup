@@ -38,11 +38,12 @@ const validateOtp = async(req,res) => {
 
 const deleteOneOtp = async(req,res) => {
     try {
-        const userData = req.body; 
-        const response = obj.deleteOneOtp(userData); 
+        const email = req.query.email || req.body?.email;
+        const userData = email ? { email } : req.body; 
+        const response = await obj.deleteOneOtp(userData); 
         return res.json({response});
     } catch (error) {
-        return res.json({status: "failed", error: error , origin:"Controller -> deleteOtp" }) ; 
+        return res.json({status: "failed", error: error.message || error , origin:"Controller -> deleteOtp" }) ; 
     }
 }
 

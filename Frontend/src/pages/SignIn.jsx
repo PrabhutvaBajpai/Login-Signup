@@ -24,6 +24,10 @@ function SignIn() {
       console.log('✅ SignIn Response:', data);
 
       if (response.ok && data.response?.status === 'successful') {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+        }
         alert('🎉 Sign in successful!');
         navigate('/dashboard');  // adjust this route as needed
       } else {

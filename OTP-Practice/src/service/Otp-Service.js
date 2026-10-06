@@ -72,8 +72,8 @@ class OtpService {
       return response ; 
     }
     catch(err){
-      console.log("Error while deleting All Otp"); 
-      return {status: "failed", error: error, origin:"Otp-service->deleteAllOtp"} ; 
+      console.log("Error while deleting All Otp", err); 
+      return {status: "failed", error: err.message || err, origin:"Otp-service->deleteAllOtp"} ; 
     }
   }
   async deleteOneOtp(userData){ // for forgot password.
@@ -82,7 +82,7 @@ class OtpService {
       return response ; 
     }
     catch(err){
-      return {status: "failed", error: error, origin:"Otp-service->deleteOneEmail"} ;  
+      return {status: "failed", error: err.message || err, origin:"Otp-service->deleteOneEmail"} ;  
     }
   }
 }
